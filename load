@@ -250,5 +250,5 @@ spawn(function()
 	LoadingGui:Destroy()
 
 	-- Launch the script library
-	loadstring(game:HttpGet("loadstring(game:HttpGet("https://codeberg.org/temporarygit_67/lib/raw/branch/main/library"))()"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/oskswrs456/library/refs/heads/main/library"))()
 end)

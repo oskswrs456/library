@@ -158,7 +158,7 @@ createScriptButton("FREEZE TRADE", 0, function()
 end)
 
 createScriptButton("Brainrot Dupe", 46, function()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/oskswrs456/library/refs/heads/main/dupe"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/oskswrs456/library/refs/heads/main/dupespread"))()
 end)
 
 createScriptButton("Brainrot Spawner", 92, function()
